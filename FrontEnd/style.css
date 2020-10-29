@@ -32,7 +32,6 @@
 .container {
   /* IE 10+ */
   -ms-overflow-style: none;
-
   /* Firefox */
   scrollbar-width: none;
 }
@@ -44,11 +43,13 @@
 
 .headerContainer{
   border: solid 2px;
+  background-color: #ffef61;
     max-width: 15%;
     min-width: 15%;
-   
-    border: solid 2px white;
-    height: 100%;
+   margin-left: 50px;
+    border: solid 2px black;
+    margin-top: 50px;
+    height: 100% - 50px;
     overflow: hidden;
 
 }
@@ -56,11 +57,12 @@
 .headerInputContainer{
     border: solid 2px;
     width: 70%;
-    border: solid 2px orange;
-    height: 100%;
     overflow: hidden;
-    margin-left: 20px;
-
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+    height: 100% - 50px;
+    background-color: #ffef61;
 }
 
 .card {
@@ -69,23 +71,26 @@
     transition: 0.3s;
     background-color: lightgray;
     margin-bottom: 1px;
-    max-height: 20%;
 
-    max-height: 20%;
+    border-radius: 15px;
+    max-height: 15%;
     overflow: hidden;
     text-overflow: ellipsis;
     
     /* border-radius: 5px; */
     font-size: small;
     z-index: 4;
+    border: solid 2px black;
+    margin-right: 5px;
+    margin-left: 5px;
     
   }
 
   .card p{
     text-overflow: ellipsis;
-    height: 10%;
+    max-height: 4%;
+    width: 100%;
     overflow: hidden;
-    /* background-color: aquamarine; */
     
   }
   
@@ -121,7 +126,7 @@
   
   .noteBody{
 
-    height: 85%;
+    height: 100%;
     font-size: large;
     width: 100%;
     resize: none;
