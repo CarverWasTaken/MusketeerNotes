@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://kit.fontawesome.com/c8df7d8e21.js" crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="MainPageStyle.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/MainPageStyle.css') }}">
+    <title>Document</title>
+</head>
+
+<body style="background-color: tan;">
+    <!-- Your Notes Column -->
+    <div class="rowContainer">
+        <div class="headerContainer">
+            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">Your Notes</h2>
+            <input type="text" class="noteSearch" placeholder="Search..."></input>
+            <div class="notecol">
+
+                <div class="card">
+                    <div class="container">
+                        <p><u><b>Note Title</b></u></p>
+                        <p>This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note.</p>
+                    </div>
+                </div>
+
+
+
+                <div class="filler" style="height: 25%;"> </div>
+                    
+            </div>
+
+        </div>
+        <!-- Shared Notes Column -->
+        <div class="headerContainer">
+            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">Shared Notes</h2>
+            <input type="text" class="noteSearch" placeholder="Share Code..."></input>
+            <div class="notecol">
+
+                 <div class="card" >
+                    <div class="container">
+                        <p><u><b>Note Title</b></u></p>
+                        <p>This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="headerInputContainer">
+            <h2 style="color: black;  padding: 0; text-align: center;">Create Note</h2>
+            <div class="inputContainer">
+                <input type="text" class="noteTitle" placeholder="Title"></input>
+                <textarea class="noteBody" placeholder="Body"></textarea>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
