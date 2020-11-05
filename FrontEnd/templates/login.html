@@ -1,35 +1,30 @@
 <html>
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='login_style.css') }}"
-    />
-  </head>
-  <body>
-    <div class="login-div">
-      <div class="title">Login</div>
+
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_style.css') }}" />
+</head>
+
+<body>
+  <div class="login-div">
+    <div class="title">Login</div>
+    <form action="">
       <div class="form">
-        <div class="username">
-          <input type="text" placeholder="Username" />
-        </div>
-        <div class="password">
-          <input type="text" placeholder="Password" />
-        </div>
+        <input type="email" placeholder="Username" class="userInput" />
+        <input type="password" placeholder="Password" class="userInput" />
         <div class="options">
           <div class="remember-me">
             <input id="remember-me" type="checkbox" />
             <label for="remember-me">Remember Me</label>
           </div>
         </div>
-        <button class="signin-btn">Login</button>
-        <button class="sign-up">
-          <a href="#">Dont Have An Account? Sign Up Here</a>
-        </button>
+        <a href="" style="font-size: x-small;">Dont Have An Account? Sign Up Here</a>
+        <input type = "submit" class="signin-btn" value="Sign in"></input>
       </div>
-    </div>
-  </body>
+    </form>
+  </div>
+
+
+</body>
+
 </html>
