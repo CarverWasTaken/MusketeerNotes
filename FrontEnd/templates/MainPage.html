@@ -16,18 +16,18 @@
             <h2 style="color: black; height: 10px; padding: 0; text-align: center;">Your Notes</h2>
             <input type="text" class="noteSearch" placeholder="Search..."></input>
             <div class="notecol">
-
+                {% for key, value in notes.items() %}
                 <div class="card">
                     <div class="container">
-                        <p><u><b>Notes Title</b></u></p>
-                        <p>This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note.</p>
+                        <p><u><b>{{value.title}}</b></u></p>
+                        <p>{{value.text}}</p>
                     </div>
                 </div>
-
+                {% endfor %}
 
 
                 <div class="filler" style="height: 25%;"> </div>
-                    
+
             </div>
 
         </div>
@@ -37,10 +37,11 @@
             <input type="text" class="noteSearch" placeholder="Share Code..."></input>
             <div class="notecol">
 
-                 <div class="card" >
+                <div class="card">
                     <div class="container">
                         <p><u><b>Note Title</b></u></p>
-                        <p>This is the body of the note. This is the body of the note. This is the body of the note. This is the body of the note.</p>
+                        <p>This is the body of the note. This is the body of the note. This is the body of the note.
+                            This is the body of the note.</p>
                     </div>
                 </div>
 
@@ -48,12 +49,15 @@
         </div>
         <div class="headerInputContainer">
             <h2 style="color: black;  padding: 0; text-align: center;">Create Note</h2>
-            <div class="inputContainer">
-                <input type="text" class="noteTitle" placeholder="Title"></input>
-                <textarea class="noteBody" placeholder="Body"></textarea>
-
-            </div>
+            <form action="addNote" method="POST" style="height: 90%;">
+                <div class="inputContainer">
+                    <input type="text" class="noteTitle" placeholder="Title" name="title"></input>
+                    <textarea class="noteBody" placeholder="Body" name="text" required="true"></textarea>
+                    <input type="submit" value="Save" class="submit">
+            </form>
         </div>
+
+    </div>
 
     </div>
 </body>
