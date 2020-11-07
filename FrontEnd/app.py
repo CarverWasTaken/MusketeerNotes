@@ -1,14 +1,26 @@
 from flask import render_template, redirect
 from flask import Flask
+from flask import request
+from flask import url_for
 app = Flask(__name__)
 
 @app.route("/")
 def main():
   return redirect('/login')
 
-@app.route("/login")
+@app.route("/login",  methods=['GET', 'POST'])
 def login():
-  return render_template('login.html')
+  if request.method == 'POST':
+      username = request.form['Username']
+      password = request.form['Password']
+
+      #fake login functionality
+      if password != '' and  username != '':
+        return redirect('/notes')
+      else:
+        return redirect('/login')
+  else:
+      return render_template('login.html')
 
 @app.route("/register")
 def register():
@@ -16,7 +28,7 @@ def register():
 
 @app.route("/notes")
 def notes():
-  return render_template('MainPage.html')
+      return render_template('MainPage.html')
 
 
 
