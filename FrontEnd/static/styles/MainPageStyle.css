@@ -1,0 +1,149 @@
+
+*{
+  font-family: 'Raleway', sans-serif;
+}
+
+.rowContainer{
+  display: flex;
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: 99%;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.container {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.headerContainer{
+  border: solid 2px;
+  background-color: lightgray;
+  max-width: 15%;
+  min-width: 15%;
+  margin-left: 50px;
+  border: solid 2px black;
+  margin-top: 50px;
+  height: 100% - 50px;
+  overflow: hidden;
+}
+
+.headerInputContainer{
+  border: solid 2px;
+  width: 70%;
+  overflow: hidden;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  height: 100% - 50px;
+  background-color: lightgray;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background-color: #ffef61;
+  margin-bottom: 1px;
+
+  border-radius: 15px;
+  max-height: 10%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  font-size: small;
+  z-index: 4;
+  border: solid 2px black;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: 0.5s max-height;
+  
+  }
+
+.card p{
+  text-overflow: ellipsis;
+  max-height: 4%;
+  width: 100%;
+  overflow: hidden;
+}
+  
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  background-color: lightyellow;
+  max-height: 25%;
+  transition-delay:0.5s;
+}
+  
+  /* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+  text-overflow: ellipsis;
+  height: 80%;
+}
+
+.inputContainer{
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+}
+
+ 
+.noteTitle{
+  width: 95%;
+  height: 25px;
+  font-size: x-large;
+  background-color:white;
+  margin-left: 2%;
+}
+
+.noteSearch{
+  width: 97%;
+  height: 25px;
+  font-size: x-large;
+  background-color:white;
+}
+  
+.noteBody{
+  height: 90%;
+  font-size: large;
+  width: 100%;
+  resize: none;
+  background-color:white;
+  margin-top: 7px;
+  font-family: 'Times New Roman', Times, serif;
+  border-color: Transparent;     
+
+  background-attachment: local;
+  background-image:
+      linear-gradient(to right, white 10px, transparent 10px),
+      linear-gradient(to left, white 10px, transparent 10px),
+      repeating-linear-gradient(white, white 30px, #ccc 30px, #ccc 31px, white 31px);
+  line-height: 31px;
+}
+
+.noteBody:focus{
+  outline: none;
+}
+
+.noteTitle:focus{
+  outline: none;
+}
+  
+.notecol {
+  width: 100%;
+  overflow: auto;
+  scrollbar-width: none; 
+  overflow-y: scroll; 
+  height: 100%;
+}

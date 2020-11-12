@@ -1,0 +1,50 @@
+* {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  background-color: #f6e58d;
+}
+
+.login-div {
+  margin: 100px auto;
+  width: 350px;
+  background-color: #fff;
+  padding: 60px;
+  border: solid black 2px;
+}
+
+.title {
+  text-align: center;
+  color: black;
+}
+
+.title {
+  font-weight: 10px;
+  font-size: 35px;
+}
+
+.form {
+  width: 90%;
+  margin: 5%;
+  border: solid 2px black;
+}
+
+.userInput{
+  width: 90%;
+  height: 5%;
+  margin: 5%;
+  border: solid 2px black;
+}
+
+.userInput:focus{
+  border-color: transparent;
+  border-radius: 25px;
+}
+
+.signin-btn{
+  background-color: greenyellow;
+  margin-left: 70px;
+}
+
+
