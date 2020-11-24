@@ -1,0 +1,13 @@
+
+Future Tasks:
+-Create Storyboards for our application for the week 2 sprint
+-continue to communicate with group members assessing issues as they arise.
+
+Progress:
+-Completed the Story Storyboards
+-Completed Basic front end development
+
+Going Forward:
+-Create dataflow diagrams
+-Create the Database for the application
+-Continue meeting with group to discuss any changes

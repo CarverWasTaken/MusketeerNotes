@@ -1,0 +1,12 @@
+10/29/2020
+
+Week 1 Status report:
+- This week we have organized as a group delegated different tasks to each different member going forward
+such as: front-end/back-end/Documentation/Database-Design
+-Carver created the wireframe for our notes application that we will use based on
+information we discussed during our team meetings
+-Little to no trouble occurred during week 1, group members added late was the only confusion
+
+Future Tasks:
+-Create Storyboards for our application for the week 2 sprint
+-continue to communicate with group members assessing issues as they arise.
