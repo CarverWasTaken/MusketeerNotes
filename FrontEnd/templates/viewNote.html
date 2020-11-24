@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../static/styles/MainPageStyle.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/MainPageStyle.css') }}">
+    <title>Document</title>
+</head>
+
+ <body style="background-color: Yellow;">
+    <!-- Your Notes Column -->
+    <div class="headerContainer">
+            <h2 style="color: black; height: 10px; padding: 0; text-align: center;"> Notes</h2>
+
+
+            <div class="inputContainer">
+                {% for key, value in notes.items() %}
+                <div class="card">
+                    <div class="container">
+                        <p><u><b>{{value.title}}</b></u></p>
+                        <p>{{value.text}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+            </div>
+
+    </div>
+ </body>
+</html>
