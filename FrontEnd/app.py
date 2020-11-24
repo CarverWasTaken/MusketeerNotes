@@ -49,7 +49,7 @@ def register():
 @app.route("/notes")
 def notes():
       # _notes = getNotes()
-      return render_template('MainPage.html', notes = yourNotes)
+      return render_template('viewNote.html', notes = yourNotes)
 
 @app.route("/addNote", methods=['POST'])
 def addNote():

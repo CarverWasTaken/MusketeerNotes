@@ -1,12 +1,10 @@
 .outerBox{
   border: solid 5px;
-  width: 90%;
-  height: 90%;
-  overflow: hidden;
+  width: 60%;
+  height:550px;
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 50px;
-
   background-color: yellow;
 }
 
@@ -15,18 +13,14 @@
   transition: 0.3s;
   background-color: white;
   margin-bottom: 1px;
-
   border-radius: 15px;
-  max-height: 90%;
-  height: 350px
-  overflow: hidden;
+  height: 85%;
   text-overflow: ellipsis;
-
   font-size: large;
   z-index: 4;
   border: solid 2px black;
   margin-right: 5px;
   margin-left: 5px;
-  transition: 0.5s max-height;
+
 }
 
