@@ -2,7 +2,16 @@ from flask import render_template, redirect
 from flask import Flask
 from flask import request
 from flask import url_for
+from database import db
+from models import Note as Note
+from models import User as User
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_note_app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 app = Flask(__name__)
+db.init_app(app)
+with app.app_context():
+    db.create_all()
+
 yourNotes = {
         0: {'title': 'First Note', 'text': 'This is my first note'},
         1: {'title': 'Second Note', 'text': 'This is my second note'},
@@ -10,7 +19,7 @@ yourNotes = {
     }
 
 def getNotes():
-   
+
    return notes
 
 @app.route("/")
