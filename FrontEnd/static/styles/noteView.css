@@ -1,32 +1,92 @@
 .outerBox{
-  border: solid 5px;
+  border: solid 2px;
   width: 90%;
-  height: 90%;
+  height: 20%;
   overflow: hidden;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 50px;
 
   background-color: yellow;
 }
 
 .innerBox{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
   background-color: white;
   margin-bottom: 1px;
 
-  border-radius: 15px;
-  max-height: 90%;
-  height: 350px
+  border-radius: 5px;
+  /* max-height: 90%; */
+  height: 400px;
   overflow: hidden;
   text-overflow: ellipsis;
 
   font-size: large;
   z-index: 4;
-  border: solid 2px black;
+  border: solid 1px black;
   margin-right: 5px;
   margin-left: 5px;
   transition: 0.5s max-height;
 }
+.innerBox textarea{
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  border-color: transparent;
+}
+.innerBox textarea:focus{
+  border-color: transparent;
+  outline: none;
+}
 
+.commentContainer{
+ border: solid 2px black;
+ width: 90%;
+ height: 400px;
+ margin-left: 5%;
+margin-right: 5%;
+ overflow: auto;
+ background-color: white;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background-color: cyan;
+  margin-bottom: 1px;
+
+  border-radius: 15px;
+  max-height: 10%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  font-size: small;
+  z-index: 4;
+  border: solid 2px black;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: 0.5s max-height;
+  
+  }
+
+.container {
+  padding: 2px 16px;
+  text-overflow: ellipsis;
+  height: 80%;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.container {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
