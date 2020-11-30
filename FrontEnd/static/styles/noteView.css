@@ -1,9 +1,9 @@
 .outerBox{
   border: solid 5px;
-  width: 60%;
-  height:550px;
-  margin-left: 50px;
-  margin-right: 50px;
+  width: 90%;
+  height:500px;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: 50px;
   background-color: yellow;
 }
