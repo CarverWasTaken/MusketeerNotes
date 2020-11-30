@@ -1,18 +1,9 @@
 .outerBox{
-<<<<<<< HEAD
-  border: solid 2px;
-  width: 90%;
-  height: 20%;
-  overflow: hidden;
-  margin-left: 5%;
-  margin-right: 5%;
-=======
   border: solid 5px;
   width: 60%;
   height:550px;
   margin-left: 50px;
   margin-right: 50px;
->>>>>>> 8d62c90bfe70897be9b01f0df41672a631e726bd
   margin-top: 50px;
   background-color: yellow;
 }
@@ -20,16 +11,13 @@
 .innerBox{
   background-color: white;
   margin-bottom: 1px;
-<<<<<<< HEAD
 
   border-radius: 5px;
   /* max-height: 90%; */
   height: 400px;
   overflow: hidden;
-=======
   border-radius: 15px;
   height: 85%;
->>>>>>> 8d62c90bfe70897be9b01f0df41672a631e726bd
   text-overflow: ellipsis;
   font-size: large;
   z-index: 4;
@@ -76,8 +64,6 @@ margin-right: 5%;
   border: solid 2px black;
   margin-right: 5px;
   margin-left: 5px;
-<<<<<<< HEAD
-  transition: 0.5s max-height;
   
   }
 
@@ -97,9 +83,6 @@ margin-right: 5%;
   -ms-overflow-style: none;
   /* Firefox */
   scrollbar-width: none;
-=======
-
->>>>>>> 8d62c90bfe70897be9b01f0df41672a631e726bd
 }
 
 .container::-webkit-scrollbar {
