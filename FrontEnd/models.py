@@ -1,11 +1,13 @@
 from database import db
-
+from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 class Note(db.Model):
     id = db.Column("id",db.Integer,primary_key=True)
     title = db.Column("title",db.String(200))
     text = db.Column("text",db.String(100))
     date = db.Column("date",db.String(50))
-    # children = db.relationship("Child")
+    children = relationship("Child")
 
     def __init__(self,title,text,date):
         self.title = title
@@ -25,4 +27,4 @@ class Comment(db.Model):
     id = db.Column("id",db.Integer,primary_key=True)
     text = db.Column("text",db.String(100))
     date = db.Column("date",db.String(50))
-    # parent_id = db.Column("parent_id", db.ForeignKey('parent.id'))
+    parent_id = Column("parent_id", ForeignKey('parent.id'))
