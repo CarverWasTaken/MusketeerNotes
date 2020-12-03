@@ -20,9 +20,6 @@ yourNotes = {
         2: {'title': 'Third Note', 'text': 'This is my third note'}
     }
 
-def getNotes():
-
-   return notes
 
 @app.route("/")
 def main():
@@ -62,9 +59,20 @@ def notes():
       # _notes = getNotes()
       return render_template('MainPage.html', notes = yourNotes)
 
+@app.route('/note/<note_id>')
+def viewNote(note_id):
+    note_id = int(note_id)
+    return render_template('viewNote.html', note = yourNotes.get(note_id))
 
+@app.route('/addNote', methods=['POST'])
+def addNote():
+    
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+        id = len(yourNotes)+1
+        yourNotes[id] = {'title': title, 'text': text}
 
-
-
+        return redirect(url_for('notes'))
 if __name__ == "__main__":
   app.run()

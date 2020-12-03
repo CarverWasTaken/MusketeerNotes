@@ -19,7 +19,7 @@
                 {% for key, value in notes.items() %}
                 <div class="card">
                     <div class="container">
-                        <p><u><b>{{value.title}}</b></u></p>
+                        <a href="/note/{{key}}"><p><u><b>{{value.title}}</b></u></p></a>
                         <p>{{value.text}}</p>
                     </div>
                 </div>

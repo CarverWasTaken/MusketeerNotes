@@ -5,7 +5,7 @@
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 50px;
-  background-color: yellow;
+  background-color: #ffef61;
 }
 
 .innerBox{
@@ -87,4 +87,10 @@ margin-right: 5%;
 
 .container::-webkit-scrollbar {
   display: none;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+  text-color: black;
 }
