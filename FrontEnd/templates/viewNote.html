@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../static/styles/noteView.css"> -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles/noteView.css') }}"> 
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles/noteView.css') }}">
 
     <title>Document</title>
+    <nav>
+
+      <a href="{{url_for('notes')}}">Notes</a>
+
+    </nav>
 </head>
     <body style="background-color: gray;">
     <div class="outerBox">
@@ -15,21 +20,21 @@
 
     <div class="innerBox">
         <textarea>{{ note.text }}</textarea>
-        
+
         <div class="edit-delete-button">
             <button>Edit</button>
             <button>Delete</button>
 
         </div>
-        
-    
-  
+
+
+
     </div>
     </div>
 
 
     <div class="commentContainer">
-       
+
         <div class="comments">
         <div class="card">
             <div class="container">
@@ -37,9 +42,9 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam vero incidunt quae consectetur, ad quaerat ex possimus voluptas nobis asperiores!</p>
             </div>
         </div>
-        
-        
-      
+
+
+
        </div>
     </div>
  </body>
