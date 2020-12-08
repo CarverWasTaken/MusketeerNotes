@@ -4,7 +4,7 @@
   height:500px;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 50px;
+  margin-top: 20px;
   background-color: #ffef61;
 }
 /*Nav bar */
@@ -22,17 +22,14 @@ nav{
 
   border-radius: 5px;
   /* max-height: 90%; */
-  height: 400px;
   overflow: hidden;
   border-radius: 15px;
-  height: 85%;
+  height: 80%;
   text-overflow: ellipsis;
   font-size: large;
-  z-index: 4;
   border: solid 1px black;
   margin-right: 5px;
   margin-left: 5px;
-  transition: 0.5s max-height;
 }
 .innerBox textarea{
   width: 100%;
@@ -100,6 +97,12 @@ margin-right: 5%;
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
-  text-color: blue;
 
+}
+
+.edit-delete-button{
+  height: 20px;
+  position: absolute;
+  right: 0px;
+  padding-right: 6%
 }
