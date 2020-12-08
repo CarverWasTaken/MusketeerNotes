@@ -7,6 +7,7 @@ from models import Note as Note
 from models import User as User
 from models import Comment as Comment
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_note_app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -14,11 +15,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-yourNotes = {
-    0: {'title': 'First Note', 'text': 'This is my first note'},
-    1: {'title': 'Second Note', 'text': 'This is my second note'},
-    2: {'title': 'Third Note', 'text': 'This is my third note'}
-}
+
 
 
 @app.route("/")
@@ -60,25 +57,37 @@ def register():
 @app.route("/notes")
 def notes():
     # _notes = getNotes()
-    return render_template('MainPage.html', notes=yourNotes)
+    a_user = db.session.query(User).filter_by(email=User.name)
+    my_note = db.session.query(Note).all()
+    return render_template('MainPage.html', notes=my_note)
 
 
 @app.route('/note/<note_id>')
 def viewNote(note_id):
-    note_id = int(note_id)
-    return render_template('viewNote.html', note=yourNotes.get(note_id))
+    a_user = db.session.query(User).filter_by(email=User.name)
+    my_note = db.session.query(Note).filter_by(id=note_id)
+    return render_template('viewNote.html', note=my_note,user=a_user)
 
 
-@app.route('/addNote', methods=['POST'])
+@app.route('/addNote', methods=['GET','POST'])
 def addNote():
 
     if request.method == 'POST':
         title = request.form['title']
         text = request.form['text']
-        id = len(yourNotes)+1
-        yourNotes[id] = {'title': title, 'text': text}
-
+        from datetime import date
+        today = date.today()
+        today = today.strftime('%m-%d-%Y')
+        new_record = Note(title,text,today)
+        db.session.add(new_record)
+        db.session.commit()
         return redirect(url_for('notes'))
+    else:
+        a_user = db.session.query(User).filter_by(email=User.name)
+        return render_template('mainPage.html',user=a_user)
+
+
+
 
 # Edit note
 
