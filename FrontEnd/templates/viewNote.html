@@ -16,11 +16,11 @@
 </head>
     <body style="background-color: gray;">
     <div class="outerBox">
-    <h2 style="color: black; padding: 0; text-align: center;">Your Notes</h2>
+    <h2 style="color: black; padding: 0; text-align: center;">{{note.title}}</h2>
 
     <form method='POST' >
     <div class="innerBox">
-        <textarea>{{ note.text }}</textarea>
+        <textarea name = "text">{{ note.text }}</textarea>
     </div>
 
       <div class="edit-delete-button">

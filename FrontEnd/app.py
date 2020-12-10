@@ -65,7 +65,7 @@ def notes():
 @app.route('/note/<note_id>')
 def viewNote(note_id):
     a_user = db.session.query(User).filter_by(email=User.name)
-    my_note = db.session.query(Note).filter_by(id=note_id)
+    my_note = db.session.query(Note).filter_by(id=note_id).one()
     return render_template('viewNote.html', note=my_note,user=a_user)
 
 
@@ -95,16 +95,15 @@ def addNote():
 @app.route('/note/edit/<note_id>',methods=['POST'])
 def update_note(note_id):
     if request.method == 'POST':
-        title = request.form['title']
-        text = request.form['noteText']
-        note = db.session.query(Note).filter_by(id=note_id)
+        text = request.form['text']
+        note = db.session.query(Note).filter_by(id=note_id).one()
 
-        note.title = title
         note.text = text
 
         db.session.add(note)
         db.session.commit()
-        return render_template('MainPage.html', notes=note)
+    return redirect('/note/' + str(note.id))
+        
 
 
 # Delete Note
@@ -112,11 +111,11 @@ def update_note(note_id):
 
 @app.route('/note/delete/<note_id>', methods=['POST'])
 def delete_note(note_id):
-    my_note= db.session.query(Note).filter_by(id=note_id)
+    my_note= db.session.query(Note).filter_by(id=note_id).one()
     db.session.delete(my_note)
     db.session.commit()
 
-    return render_template('viewNote.html')
+    return redirect('/notes')
 
 
 if __name__ == "__main__":

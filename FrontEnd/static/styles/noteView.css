@@ -24,7 +24,7 @@ nav{
   /* max-height: 90%; */
   overflow: hidden;
   border-radius: 15px;
-  height: 80%;
+  height: 350px;
   text-overflow: ellipsis;
   font-size: large;
   border: solid 1px black;
