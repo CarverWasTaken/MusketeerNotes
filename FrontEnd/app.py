@@ -7,22 +7,25 @@ from models import Note as Note
 from models import User as User
 from models import Comment as Comment
 
-
+# set vairable "app" to flask
 app = Flask(__name__)
+
+# Database configs
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_note_app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# initialzie database "db"
 db.init_app(app)
 with app.app_context():
     db.create_all()
 
 
-
-
+# Homepage route
 @app.route("/")
 def main():
     return redirect('/login')
 
 
+# Login page route
 @app.route("/login",  methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -36,6 +39,8 @@ def login():
             return redirect('/login')
     else:
         return render_template('login.html')
+
+# Register page route -- also contains password authentication
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -54,6 +59,7 @@ def register():
         return render_template('register.html')
 
 
+# Access to list of notes
 @app.route("/notes")
 def notes():
     # _notes = getNotes()
@@ -61,15 +67,18 @@ def notes():
     my_note = db.session.query(Note).all()
     return render_template('MainPage.html', notes=my_note)
 
+# Access to indiviual notes with a unique note id
+
 
 @app.route('/note/<note_id>')
 def viewNote(note_id):
     a_user = db.session.query(User).filter_by(email=User.name)
     my_note = db.session.query(Note).filter_by(id=note_id).one()
-    return render_template('viewNote.html', note=my_note,user=a_user)
+    return render_template('viewNote.html', note=my_note, user=a_user)
 
 
-@app.route('/addNote', methods=['GET','POST'])
+# User capibility to add notes -- saves notes to database "db"
+@app.route('/addNote', methods=['GET', 'POST'])
 def addNote():
 
     if request.method == 'POST':
@@ -78,21 +87,17 @@ def addNote():
         from datetime import date
         today = date.today()
         today = today.strftime('%m-%d-%Y')
-        new_record = Note(title,text,today)
+        new_record = Note(title, text, today)
         db.session.add(new_record)
         db.session.commit()
         return redirect(url_for('notes'))
     else:
         a_user = db.session.query(User).filter_by(email=User.name)
-        return render_template('mainPage.html',user=a_user)
+        return render_template('mainPage.html', user=a_user)
 
 
-
-
-# Edit note
-
-
-@app.route('/note/edit/<note_id>',methods=['POST'])
+# Edit note and updating notes -- saving it to database "db"
+@app.route('/note/edit/<note_id>', methods=['POST'])
 def update_note(note_id):
     if request.method == 'POST':
         text = request.form['text']
@@ -103,20 +108,18 @@ def update_note(note_id):
         db.session.add(note)
         db.session.commit()
     return redirect('/note/' + str(note.id))
-        
 
 
-# Delete Note
-
-
+# Delete Note -- updateing databse to reflect deletion
 @app.route('/note/delete/<note_id>', methods=['POST'])
 def delete_note(note_id):
-    my_note= db.session.query(Note).filter_by(id=note_id).one()
+    my_note = db.session.query(Note).filter_by(id=note_id).one()
     db.session.delete(my_note)
     db.session.commit()
 
     return redirect('/notes')
 
 
+# start the application "app"
 if __name__ == "__main__":
     app.run()
