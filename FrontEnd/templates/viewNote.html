@@ -18,18 +18,16 @@
     <div class="outerBox">
     <h2 style="color: black; padding: 0; text-align: center;">Your Notes</h2>
 
+    <form method='POST' >
     <div class="innerBox">
         <textarea>{{ note.text }}</textarea>
-
-        
-
-
-
     </div>
-    <div class="edit-delete-button">
-        <button>Save Changes</button>
-        <button>Delete</button>
-    </div>
+
+      <div class="edit-delete-button">
+        <button type='submit' formaction='/note/edit/{{ note.id }}'>Save Changes</button>
+        <button type='submit' formaction='/note/delete/{{ note.id }}'>Delete</button>
+      </div>
+    </form>
     </div>
 
 

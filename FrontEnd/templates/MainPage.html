@@ -23,8 +23,9 @@
 
                     <div class="container">
 
-                        <a href="{{url_for('viewNote',note_id=note.id)}}">{{note.title}}</a>
+                        <a href="/note/{{note.id}}">{{note.title}}</a>
                         <p>{{note.text}}</p>
+
 
                     </div>
 
