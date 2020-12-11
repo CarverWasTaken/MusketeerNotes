@@ -2,6 +2,7 @@ from flask import render_template, redirect
 from flask import Flask
 from flask import request
 from flask import url_for
+from flask.globals import session
 from database import db
 from models import Note as Note
 from models import User as User
@@ -118,6 +119,13 @@ def delete_note(note_id):
     db.session.commit()
 
     return redirect('/notes')
+
+
+# Add new comments
+
+@app.route('/note/<note_id>/comment', methods=['POST'])
+def new_comment(note_id):
+    return render_template('/notes')
 
 
 # start the application "app"
