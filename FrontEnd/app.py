@@ -121,11 +121,24 @@ def delete_note(note_id):
     return redirect('/notes')
 
 
-# Add new comments
 
-@app.route('/note/<note_id>/comment', methods=['POST'])
+# Route to add a comment to an established note
+@app.route('/note/<note_id>/comment', methods=['GET','POST'])
 def new_comment(note_id):
-    return render_template('/notes')
+    if request.method == 'POST':
+        text = request.form['text']
+        from datetime import date
+        today = date.today()
+        today = today.strftime('%m-%d-%Y')
+        new_record = Comment(text,today,note_id)
+        db.session.add(new_record)
+        db.session.commit()
+        return redirect(url_for('notes'))
+    else:
+        #Redirects back to view if page crashes
+        return redirect(url_for('notes'))
+
+
 
 
 # start the application "app"

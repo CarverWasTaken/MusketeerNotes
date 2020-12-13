@@ -28,3 +28,8 @@ class Comment(db.Model):
     text = db.Column("text",db.String(100))
     date = db.Column("date",db.String(50))
     parent_id = Column("parent_id", ForeignKey('note.id'))
+
+    def __init__(self,text,date,parent_id):
+        self.text = text
+        self.date = date
+        self.parent_id = parent_id

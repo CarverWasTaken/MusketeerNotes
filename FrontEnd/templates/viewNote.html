@@ -38,31 +38,27 @@
           <div class="card">
 
               <div class="container">
-
-                  <p><u><b>Commented username</b></u></p>
-
-                  <p>Body...</p>
-
-              </div>
-
-              <form>
-
-                  <div class="commentedusername">
-
-                  <textarea type="text" placeholder="commented username"></textarea>
+                  <!-- User.id will go here -->
+                  <!-- This is the portion that isnt working -->
+                  <p><u><b>Username</b></u></p>
+                  {% if comment %}
+                  <p>{{ comment.text}}</p>
+                  {% else %}
+                  <p>Comments show here</p>
+                  {% endif %}
 
               </div>
-
+              <!-- Adding comment/Deleting Comment/Edit Comment -->
+              <form formaction = "/note/{{ note.id }}/comment">
               <div class="commentedusernamebuttons">
+                  <input type="text" placeholder="Comment text" name="text"></input>
 
                   <button type="submit">Add</button>
 
                   <button type="submit">Edit</button>
 
                   <button type="submit">Delete</button>
-
               </div>
-
               </form>
 
           </div>
