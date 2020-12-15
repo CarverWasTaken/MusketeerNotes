@@ -46,12 +46,25 @@ nav{
 .commentContainer{
  border: solid 2px black;
  width: 90%;
- height: 400px;
+ height: 250px;
  margin-left: 5%;
-margin-right: 5%;
+ margin-right: 5%;
  overflow: auto;
- background-color: white;
+ background-color: gray;
 }
+/* Some extremely weird values here because there was a weird bug that made it so that whenever the top div would overflow it would move the div below it */
+.formContainer{
+  border: solid 2px black;
+  width: 89%;
+  height: 150px;
+  /* margin-left: 5%; */
+  /* margin-right: 5%; */
+  overflow: hidden;
+  background-color: gray;
+  position: fixed;
+  bottom: 15px;
+  left: 5.5%;
+ }
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -105,4 +118,16 @@ a {
   position: absolute;
   right: 0px;
   padding-right: 6%
+}
+
+.textPlace{
+  height: 100px;
+  width: 100%;
+  resize: none;
+}
+
+.commentBox{
+  width: 100%;
+  height: 80%;
+  resize: none;
 }

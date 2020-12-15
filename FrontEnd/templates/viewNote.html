@@ -31,26 +31,38 @@
     </div>
 
 
-    {% if note.comments %}
-    {% if note.comments|length > 0 %}
-      <h2>Comments</h2>
-      <ul>
-      {% for comment in note.comments %}
-        <li>{{ comment.content }}</li>
-        <form method = 'POST'> <button type="submit" formaction='/comment/delete/{{ comment.id }}/{{ note.id }}' formmethod="POST">Delete</button></form>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endif %}
-    <form action="{{ url_for('new_comment', note_id=note.id) }}" method="post">
-      <div class="formwrapper">
-        <h2 class="title">Add a comment</h2>
-        <div class="form-field">
-          {{ form.comment.label }} <br/> {{ form.comment }}
-        </div>
-        {{ form.submit }}
+    <div class="commentContainer">
+    {% for comment in note.comments %}
+      <div class="comments">
+      <div class="card">
+          <div class="container">
+              <p><u><b>Comment</b></u></p>
+              <form>
+              <p><textarea class="commentBox" name = 'text'>{{ comment.content }}</textarea></p>
+              <div style="display: flex;"> 
+                <form method = 'POST'> <button type="submit" formaction='/comment/edit/{{ comment.id }}/{{ note.id }}' formmethod="POST">Save</button></form>
+                <form method = 'POST'> <button type="submit" formaction='/comment/delete/{{ comment.id }}/{{ note.id }}' formmethod="POST">Delete</button></form>
+              </div> 
+              </form>
+          </div>
       </div>
-    </form>
+      {% endfor %}
+      </div>
+    </div>
+
+
+
+    <div class="formContainer">
+    <form action="{{ url_for('new_comment', note_id=note.id) }}" method="post">
+        <div class="formwrapper">
+          <div class="form-field">
+             {{ form.comment(class_="textPlace") }}
+          </div>
+          {{ form.submit }}
+        </form> 
+    </div>
+
+    
 
  </body>
 </html>

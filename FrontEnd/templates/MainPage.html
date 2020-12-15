@@ -27,7 +27,17 @@
 
             <h2 style="color: black; height: 10px; padding: 0; text-align: center;">{{user}}'s' Notes</h2>
             <input type="text" class="noteSearch" placeholder="Search..."></input>
+            <div class="card">
 
+                <div class="container">
+
+                    <a href="">haha yeet</a>
+                    <p>haha yeet</p>
+
+
+                </div>
+
+            </div>
             <div class="notecol">
                 {% for note in notes %}
 
@@ -51,22 +61,7 @@
             </div>
 
         </div>
-        <!-- Shared Notes Column -->
-        <div class="headerContainer">
-            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">Shared Notes</h2>
-            <input type="text" class="noteSearch" placeholder="Share Code..."></input>
-            <div class="notecol">
-
-                <div class="card">
-                    <div class="container">
-                        <p><u><b>Note Title</b></u></p>
-                        <p>This is the body of the note. This is the body of the note. This is the body of the note.
-                            This is the body of the note.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        
         <div class="headerInputContainer">
             <h2 style="color: black;  padding: 0; text-align: center;">Create Note</h2>
             <form action="addNote" method="POST" style="height: 90%;">
