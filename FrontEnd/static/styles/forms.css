@@ -1,3 +1,13 @@
-.form-field{
-    background-color: aqua;
+.body{
+    background-color: tan;
+}
+.formwrapper{
+    background-color: yellow;
+    width: 30%;
+    height: 40%;
+    border: 2px solid black;   
+    justify-content: center; 
+    margin-top: 10%;
+    margin-left: 35%;
+    text-align: center;
 }

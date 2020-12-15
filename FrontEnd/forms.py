@@ -10,22 +10,25 @@ class RegisterForm(FlaskForm):
     class Meta:
         csrf = False
 
-    firstname = StringField('First Name', validators=[Length(1, 10)])
+    firstname = StringField('First Name', validators=[Length(1, 10)], render_kw={"placeholder": "First Name"})
 
-    lastname = StringField('Last Name', validators=[Length(1, 20)])
+    lastname = StringField('Last Name', validators=[Length(1, 20)], render_kw={"placeholder": "Last Name"})
 
     email = StringField('Email', [
         Email(message='Not a valid email address.'),
-        DataRequired()])
+        DataRequired()], render_kw={"placeholder": "Email"})
 
     password = PasswordField('Password', [
         DataRequired(message="Please enter a password."),
         EqualTo('confirmPassword', message='Passwords must match')
-    ])
+    ],
+    render_kw={"placeholder": "Password"}
+    )
 
     confirmPassword = PasswordField('Confirm Password', validators=[
-        Length(min=6, max=10)
-    ])
+        Length(min=6, max=10),
+        
+    ], render_kw={"placeholder": "Confirm Password"}   )
     submit = SubmitField('Submit')
 
     def validate_email(self, field):
@@ -39,10 +42,10 @@ class LoginForm(FlaskForm):
 
     email = StringField('Email', [
         Email(message='Not a valid email address.'),
-        DataRequired()])
+        DataRequired()], render_kw={"placeholder": "Email"})
 
     password = PasswordField('Password', [
-        DataRequired(message="Please enter a password.")])
+        DataRequired(message="Please enter a password.")], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Submit')
 
