@@ -7,6 +7,7 @@ class Note(db.Model):
     title = db.Column("title",db.String(200))
     text = db.Column("text",db.String(100))
     date = db.Column("date",db.String(50))
+    comments = db.relationship("comment",backref="note",cascade="all,delete-orphan",lazy = True)
     #children = relationship("Child")
 
     def __init__(self,title,text,date):
@@ -18,6 +19,7 @@ class User(db.Model):
     id = db.Column("id",db.Integer,primary_key=True)
     name = db.Column("name",db.String(200))
     email = db.Column("email",db.String(200))
+    comments = db.relationship("comment",backref="note",lazy = True)
 
     def __init__(self,name,email):
         self.name = name
