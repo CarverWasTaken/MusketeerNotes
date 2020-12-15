@@ -219,6 +219,15 @@ def new_comment(note_id):
     else:
         return redirect(url_for('login'))
 
+# Delete Note -- updateing databse to reflect deletion
+@app.route('/comment/delete/<comment_id>/<note_id>', methods=['POST'])
+def delete_comment(comment_id, note_id):
+    my_comment = db.session.query(Comment).filter_by(id=comment_id).one()
+    db.session.delete(my_comment)
+    db.session.commit()
+
+    return redirect('/note/' + str(note_id))
+
     # start the application "app"
 if __name__ == "__main__":
     app.run()

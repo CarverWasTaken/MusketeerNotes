@@ -37,6 +37,7 @@
       <ul>
       {% for comment in note.comments %}
         <li>{{ comment.content }}</li>
+        <form method = 'POST'> <button type="submit" formaction='/comment/delete/{{ comment.id }}/{{ note.id }}' formmethod="POST">Delete</button></form>
       {% endfor %}
       </ul>
     {% endif %}
