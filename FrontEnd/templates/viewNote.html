@@ -31,43 +31,22 @@
     </div>
 
 
-    <div class="commentcontainer">
 
-      <div class="comments">
 
-          <div class="card">
 
-              <div class="container">
-                  <!-- User.id will go here -->
-                  <!-- This is the portion that isnt working -->
-                  <p><u><b>Username</b></u></p>
-                  {% if comment %}
-                  <p>{{ comment.text}}</p>
-                  {% else %}
-                  <p>Comments show here</p>
-                  {% endif %}
 
-              </div>
-              <!-- Adding comment/Deleting Comment/Edit Comment -->
-              <form formaction = "/note/{{ note.id }}/comment">
-              <div class="commentedusernamebuttons">
-                  <input type="text" placeholder="Comment text" name="text"></input>
-
-                  <button type="submit">Add</button>
-
-                  <button type="submit">Edit</button>
-
-                  <button type="submit">Delete</button>
-              </div>
-              </form>
-
-          </div>
-
+        <!--    COMMENTING STUFF HERE     -->
+    <div class="commentOuterBox">
+      <h4 style="color: black; padding: 0; text-align: left; padding-left: 10px; margin-top: 2px; padding-bottom: 2px;">Create Comment</h4>
+      <form method='POST' >
+        <div class="commentTextBox">
+          <textarea name = "text" placeholder="Add a comment..."></textarea>
+        </div>
+        <div class="edit-delete-button">
+          <button type='submit' formaction="/note/{{note.id }}/comment">Submit</button>
+        </div>
       </div>
-
-  </div>
-
-
+    </form>
 
  </body>
 </html>
