@@ -8,12 +8,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/MainPageStyle.css') }}">
     <title>Document</title>
 </head>
+{% if user %}
+<nav>
+  <a href="{{url_for('logout')}}">Logout</a>
+</nav>
+{% else %}
+<nav>
+  <a href="{{url_for('login')}}">Login</a> ||
+  <a href="{{url_for('register')}}">Register</a>
+</nav>
+{% endif %}
 
 <body style="background-color: tan;">
     <!-- Your Notes Column -->
+
     <div class="rowContainer">
         <div class="headerContainer">
-            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">Your Notes</h2>
+
+            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">{{user}}'s' Notes</h2>
             <input type="text" class="noteSearch" placeholder="Search..."></input>
 
             <div class="notecol">

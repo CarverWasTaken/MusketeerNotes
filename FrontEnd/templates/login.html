@@ -1,30 +1,44 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_style.css') }}" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
 </head>
-
-<body>
-  <div class="login-div">
-    <div class="title">Login</div>
-    <form action="login" method="POST">
-      <div class="form">
-        <input type="email" placeholder="Username" class="userInput" name="Username"/>
-        <input type="password" placeholder="Password" class="userInput"  name="Password"/>
-        <div class="options">
-          <div class="remember-me">
-            <input id="remember-me" type="checkbox" />
-            <label for="remember-me">Remember Me</label>
-          </div>
+    <body>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('notes') }}"> Home</a> ||
+            </nav>
         </div>
-        <a href="register" style="font-size: x-small;">Dont Have An Account? Sign Up Here</a>
-        <input type = "submit" class="signin-btn" value="Sign in"></input>
-      </div>
-    </form>
-  </div>
 
+        <h1>Welcome {% if user %}{{user}}{% endif %}!</h1>
 
-</body>
-
+        <h2>Keep all your notes in one great location!</h2>
+        <div class="formwrapper">
+            <h2 class="title">Login</h2>
+            <form method="POST" action="/login">
+                <div class="form-field">{{ form.name.label }} {{ form.name }}
+                    {% if form.name.errors %}
+                    <ul class="errors">
+                        {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="form-field">{{ form.password.label }} {{ form.password }}
+                    {% if form.password.errors %}
+                    <ul class="errors">
+                        {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {{ form.submit }}
+            </form>
+        </div>
+    </body>
 </html>
