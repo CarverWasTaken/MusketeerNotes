@@ -121,26 +121,54 @@ def delete_note(note_id):
     return redirect('/notes')
 
 
-
 # Route to add a comment to an established note
-@app.route('/note/<note_id>/comment', methods=['GET','POST'])
+@app.route('/note/<note_id>/comment', methods=['GET', 'POST'])
 def new_comment(note_id):
     if request.method == 'POST':
         text = request.form['text']
         from datetime import date
         today = date.today()
         today = today.strftime('%m-%d-%Y')
-        new_record = Comment(text,today,note_id)
+        new_record = Comment(text, today, note_id)
         db.session.add(new_record)
         db.session.commit()
         return redirect(url_for('notes'))
     else:
-        #Redirects back to view if page crashes
+        # Redirects back to view if page crashes
         return redirect(url_for('notes'))
 
 
+# editing an exisiting comment
+@app.route('/note/edit/<note_id>/comment', methods=['POST'])
+def edit_comment(parent_id):
+    if request.method == 'POST':
+        # get the data from comment
+        text = request.form['text']
+
+        comment = db.session.query(Comment).filter_by(id=parent_id).one()
+
+        # updtae the comment with new text
+        comment.text = text
+        # add the text to database
+        db.session.add(comment)
+        db.session.commit()
+
+        return redirect(url_for('viewNote.html'))
 
 
-# start the application "app"
+# Delete exisiting note
+@app.route('/note/delete/<note_id>/comment', methods=['POST'])
+def delete_comment(note_id, parent_id):
+
+    comment = db.session.query(Comment).filterby(id=parent_id).one()
+
+    # delete the comment from database
+    db.session.delete(comment)
+    db.session.commit()
+
+    redirect(url_for('viewNote.html'))
+
+
+    # start the application "app"
 if __name__ == "__main__":
     app.run()
