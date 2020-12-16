@@ -10,6 +10,7 @@ from models import Comment as Comment
 from forms import RegisterForm, LoginForm, CommentForm
 import bcrypt
 from flask import session
+from sqlalchemy import and_, or_, not_
 
 from models import Comment as Comments
 
@@ -90,15 +91,19 @@ def logout():
 
 
 # Access to list of notes
-@app.route("/notes")
+@app.route("/notes", methods=['POST', 'GET'])
 def notes():
-    # _notes = getNotes()
     if session.get('user'):
-        my_note = db.session.query(Note).filter_by(user_id=session['user_id']).all()
-        return render_template('MainPage.html', notes=my_note,user=session['user'])
+        if request.method == 'POST':
+            searchFor = request.form['search']
+            search = db.session.query(Note).filter((or_(Note.title.contains(searchFor), Note.text.contains(searchFor)))).filter_by(user_id=session['user_id'])                                
+            return render_template('MainPage.html', notes=search, user=session['user'])
+        else:
+            my_note = db.session.query(Note).filter_by(user_id=session['user_id']).all()                        
+            return render_template('MainPage.html', notes=my_note,user=session['user'])
     return redirect(url_for('login'))
 
-# Access to indiviual notes with a unique note id
+
 
 
 @app.route('/note/<note_id>')

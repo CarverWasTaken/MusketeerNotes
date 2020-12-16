@@ -26,7 +26,13 @@
         <div class="headerContainer">
 
             <h2 style="color: black; height: 10px; padding: 0; text-align: center;">{{user}}'s' Notes</h2>
-            <input type="text" class="noteSearch" placeholder="Search..."></input>
+            <form method = 'POST'>
+                <div class="searchHolder" style="display: flex">
+            <input type="text" class="noteSearch" placeholder="Search..." name = 'search' action="search"></input>
+            <button type="submit" formaction='/notes' formmethod="POST">GO</button>
+                </div>
+            </form>
+            
             <div class="card">
 
                 <div class="container">
@@ -64,7 +70,7 @@
         
         <div class="headerInputContainer">
             <h2 style="color: black;  padding: 0; text-align: center;">Create Note</h2>
-            <form action="addNote" method="POST" style="height: 90%;">
+            <form action="/addNote" method="POST" style="height: 90%;">
                 <div class="inputContainer">
                     <input type="text" class="noteTitle" placeholder="Title" name="title" required ="true"></input>
                     <textarea class="noteBody" placeholder="Body" name="text" required="true"></textarea>
