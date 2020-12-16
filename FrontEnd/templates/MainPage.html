@@ -32,26 +32,33 @@
             <button type="submit" formaction='/notes' formmethod="POST">GO</button>
                 </div>
             </form>
-            
-            <div class="card">
+            <!-- This is for the pinned note if there is one -->
+            {% if pinned %}             
+            <div class="pinnedCard">
 
                 <div class="container">
 
-                    <a href="">haha yeet</a>
-                    <p>haha yeet</p>
+                    <div style="display: flex;">
+                        <a href="/note/{{pinned.id}}">{{pinned.title}}</a>
+                        <form method = 'POST' style="margin-left: 5px;" class = buttonForm> <button type="submit" formaction='/note/unpin' formmethod="POST"  class = buttonForm>unpin</button></form>
+                        </div>  
+                    <p>{{ pinned.text }}</p>
 
 
                 </div>
 
             </div>
+            {% endif %}
             <div class="notecol">
                 {% for note in notes %}
 
                 <div class="card">
 
                     <div class="container">
-
+                        <div style="display: flex;">
                         <a href="/note/{{note.id}}">{{note.title}}</a>
+                        <form method = 'POST' style="margin-left: 5px;"> <button type="submit" formaction='/note/pin/{{note.id}}' formmethod="POST"  class = buttonForm> pin</button></form>
+                        </div>  
                         <p>{{note.text}}</p>
 
 

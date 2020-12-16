@@ -23,14 +23,16 @@ class Note(db.Model):
     title = db.Column('title', db.String(200))
     text = db.Column('text', db.String(100))
     date = db.Column('date', db.String(50))
+    pinned = db.Column('pinned', db.Boolean())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comments = db.relationship("Comment", backref="note", cascade = "all, delete-orphan", lazy = True)
     
 
-    def __init__(self, title, text, date, user_id):
+    def __init__(self, title, text, date, pinned, user_id):
         self.title  = title
         self.text = text
         self.date = date
+        self.pinned = pinned
         self.user_id = user_id
 
 class Comment(db.Model):

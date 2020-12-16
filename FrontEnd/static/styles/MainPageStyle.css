@@ -27,7 +27,6 @@
 .container::-webkit-scrollbar {
   display: none;
 }
-
 .headerContainer{
   border: solid 2px;
   background-color: lightgray;
@@ -84,6 +83,44 @@
   max-height: 25%;
   transition-delay:0.5s;
 }
+
+.pinnedCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background-color: cyan;
+  margin-bottom: 1px;
+
+  border-radius: 15px;
+  max-height: 10%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  font-size: small;
+  z-index: 4;
+  border: solid 2px black;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: 0.5s max-height;
+  
+  }
+
+.pinnedCard p{
+  text-overflow: ellipsis;
+  max-height: 4%;
+  width: 100%;
+  overflow: hidden;
+}
+  
+.pinnedCard :hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  background-color: lightblue;
+  max-height: 25%;
+  transition-delay:0.5s;
+}
+
+
   
   /* Add some padding inside the card container */
 .container {

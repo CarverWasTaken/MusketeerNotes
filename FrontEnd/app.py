@@ -95,12 +95,14 @@ def logout():
 def notes():
     if session.get('user'):
         if request.method == 'POST':
+            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
             searchFor = request.form['search']
-            search = db.session.query(Note).filter((or_(Note.title.contains(searchFor), Note.text.contains(searchFor)))).filter_by(user_id=session['user_id'])                                
-            return render_template('MainPage.html', notes=search, user=session['user'])
+            search = db.session.query(Note).filter((or_(Note.title.contains(searchFor), Note.text.contains(searchFor)))).filter_by(user_id=session['user_id'], pinned = False)                                
+            return render_template('MainPage.html', notes=search, user=session['user'], pinned = pinned)
         else:
-            my_note = db.session.query(Note).filter_by(user_id=session['user_id']).all()                        
-            return render_template('MainPage.html', notes=my_note,user=session['user'])
+            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
+            my_note = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = False).all()                        
+            return render_template('MainPage.html', notes=my_note,user=session['user'], pinned = pinned)
     return redirect(url_for('login'))
 
 
@@ -127,7 +129,7 @@ def addNote():
         from datetime import date
         today = date.today()
         today = today.strftime('%m-%d-%Y')
-        new_record = Note(title, text, today,session['user_id'])
+        new_record = Note(title, text, today, False, session['user_id'])
         db.session.add(new_record)
         db.session.commit()
         return redirect(url_for('notes'))
@@ -199,6 +201,40 @@ def update_comment(comment_id, note_id):
         db.session.add(comment)
         db.session.commit()
     return redirect('/note/' + str(note_id))
+
+# part related to pinning comments
+
+@app.route('/note/pin/<note_id>', methods=['POST'])
+def pin(note_id):
+    if session.get('user'):
+        # checking to see if there is a note pinned
+        previousPinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
+        if previousPinned:
+            previousPinned.pinned = False
+            db.session.add(previousPinned)
+            db.session.commit()
+        
+        my_note = db.session.query(Note).filter_by(id=note_id).one()
+        my_note.pinned = True
+        db.session.add(my_note)
+        db.session.commit()
+
+        return redirect('/notes')
+    else:
+         return redirect('/login')
+
+@app.route('/note/unpin', methods=['POST'])
+def unpin():
+    if session.get('user'):
+        # checking to see if there is a note pinned
+        previousPinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
+        if previousPinned:
+            previousPinned.pinned = False
+            db.session.add(previousPinned)
+            db.session.commit()
+        return redirect('/notes')
+    else:
+         return redirect('/login')
 
     # start the application "app"
 if __name__ == "__main__":
