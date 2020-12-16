@@ -1,7 +1,12 @@
+html,body {
+  height:98%;
+  min-height:98%;
+  max-height:100%;
+}
 .outerBox{
   border: solid 1px;
   width: 90%;
-  height:500px;
+  height:50%;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 20px;
@@ -46,7 +51,7 @@ nav{
 .commentContainer{
  border: solid 2px black;
  width: 90%;
- height: 250px;
+ height: 30%;
  margin-left: 5%;
  margin-right: 5%;
  overflow: auto;
@@ -55,15 +60,12 @@ nav{
 /* Some extremely weird values here because there was a weird bug that made it so that whenever the top div would overflow it would move the div below it */
 .formContainer{
   border: solid 2px black;
-  width: 89%;
-  height: 150px;
-  /* margin-left: 5%; */
-  /* margin-right: 5%; */
+  width: 90%;
+  height: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
   overflow: hidden;
   background-color: gray;
-  position: fixed;
-  bottom: 15px;
-  left: 5.5%;
  }
 
 .card {
