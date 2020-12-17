@@ -10,12 +10,12 @@
 </head>
 {% if user %}
 <nav>
-  <a href="{{url_for('logout')}}">Logout</a>
+    <a href="{{url_for('logout')}}">Logout</a>
 </nav>
 {% else %}
 <nav>
-  <a href="{{url_for('login')}}">Login</a> ||
-  <a href="{{url_for('register')}}">Register</a>
+    <a href="{{url_for('login')}}">Login</a> ||
+    <a href="{{url_for('register')}}">Register</a>
 </nav>
 {% endif %}
 
@@ -25,23 +25,24 @@
     <div class="rowContainer">
         <div class="headerContainer">
 
-            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">{{user}}'s' Notes</h2>
-            <form method = 'POST'>
+            <h2 style="color: black; height: 10px; padding: 0; text-align: center;">{{user}}'s Notes</h2>
+            <form method='POST'>
                 <div class="searchHolder" style="display: flex">
-            <input type="text" class="noteSearch" placeholder="Search..." name = 'search' action="search"></input>
-            <button type="submit" formaction='/notes' formmethod="POST">GO</button>
+                    <input type="text" class="noteSearch" placeholder="Search..." name='search' action="search"></input>
+                    <button type="submit" formaction='/notes' formmethod="POST">GO</button>
                 </div>
             </form>
             <!-- This is for the pinned note if there is one -->
-            {% if pinned %}             
+            {% if pinned %}
             <div class="pinnedCard">
 
                 <div class="container">
 
                     <div style="display: flex;">
                         <a href="/note/{{pinned.id}}">{{pinned.title}}</a>
-                        <form method = 'POST' style="margin-left: 5px;" class = buttonForm> <button type="submit" formaction='/note/unpin' formmethod="POST"  class = buttonForm>unpin</button></form>
-                        </div>  
+                        <form method='POST' style="margin-left: 5px;" class=buttonForm> <button type="submit"
+                                formaction='/note/unpin' formmethod="POST" class=buttonForm>unpin</button></form>
+                    </div>
                     <p>{{ pinned.text }}</p>
 
 
@@ -56,9 +57,11 @@
 
                     <div class="container">
                         <div style="display: flex;">
-                        <a href="/note/{{note.id}}">{{note.title}}</a>
-                        <form method = 'POST' style="margin-left: 5px;"> <button type="submit" formaction='/note/pin/{{note.id}}' formmethod="POST"  class = buttonForm> pin</button></form>
-                        </div>  
+                            <a href="/note/{{note.id}}">{{note.title}}</a>
+                            <form method='POST' style="margin-left: 5px;"> <button type="submit"
+                                    formaction='/note/pin/{{note.id}}' formmethod="POST" class=buttonForm> pin</button>
+                            </form>
+                        </div>
                         <p>{{note.text}}</p>
 
 
@@ -74,12 +77,12 @@
             </div>
 
         </div>
-        
+
         <div class="headerInputContainer">
             <h2 style="color: black;  padding: 0; text-align: center;">Create Note</h2>
             <form action="/addNote" method="POST" style="height: 90%;">
                 <div class="inputContainer">
-                    <input type="text" class="noteTitle" placeholder="Title" name="title" required ="true"></input>
+                    <input type="text" class="noteTitle" placeholder="Title" name="title" required="true"></input>
                     <textarea class="noteBody" placeholder="Body" name="text" required="true"></textarea>
                     <input type="submit" value="Save" class="submit">
             </form>

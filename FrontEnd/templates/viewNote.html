@@ -2,68 +2,72 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../static/styles/noteView.css"> -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles/noteView.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="../static/styles/noteView.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/noteView.css') }}">
 
-    <title>Document</title>
-    <nav>
+  <title>Document</title>
+  <nav>
 
-      <a href="{{url_for('notes')}}">Notes</a>
+    <a href="{{url_for('notes')}}">Notes</a>
 
-    </nav>
+  </nav>
 </head>
-    <body style="background-color: gray;">
-    <div class="outerBox">
+
+<body style="background-color: gray;">
+  <div class="outerBox">
     <h2 style="color: black; padding: 0; text-align: center;">{{note.title}}</h2>
 
-    <form method='POST' >
-    <div class="innerBox">
-        <textarea name = "text">{{ note.text }}</textarea>
-    </div>
+    <form method='POST'>
+      <div class="innerBox">
+        <textarea name="text">{{ note.text }}</textarea>
+      </div>
 
       <div class="edit-delete-button">
         <button type='submit' formaction='/note/edit/{{ note.id }}'>Save Changes</button>
         <button type='submit' formaction='/note/delete/{{ note.id }}'>Delete</button>
       </div>
     </form>
-    </div>
+  </div>
 
 
-    <div class="commentContainer">
+  <div class="commentContainer">
     {% for comment in note.comments %}
-      <div class="comments">
+    <div class="comments">
       <div class="card">
-          <div class="container">
-              <p><u><b>Comment</b></u></p>
-              <form>
-              <p><textarea class="commentBox" name = 'text'>{{ comment.content }}</textarea></p>
-              <div style="display: flex;"> 
-                <form method = 'POST'> <button type="submit" formaction='/comment/edit/{{ comment.id }}/{{ note.id }}' formmethod="POST">Save</button></form>
-                <form method = 'POST'> <button type="submit" formaction='/comment/delete/{{ comment.id }}/{{ note.id }}' formmethod="POST">Delete</button></form>
-              </div> 
-              </form>
-          </div>
+        <div class="container">
+          <p><u><b>Comment</b></u></p>
+          <form>
+            <p><textarea class="commentBox" name='text'>{{ comment.content }}</textarea></p>
+            <div style="display: flex;">
+              <form method='POST'> <button type="submit" formaction='/comment/edit/{{ comment.id }}/{{ note.id }}'
+                  formmethod="POST">Save</button></form>
+              <form method='POST'> <button type="submit" formaction='/comment/delete/{{ comment.id }}/{{ note.id }}'
+                  formmethod="POST">Delete</button></form>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-      {% endfor %}
-      
-    </div>
+    {% endfor %}
+
+  </div>
 
 
 
-    <div class="formContainer">
+  <div class="formContainer">
     <form action="{{ url_for('new_comment', note_id=note.id) }}" method="post">
-        <div class="formwrapper">
-          <div class="form-field">
-             {{ form.comment(class_="textPlace") }}
-          </div>
-          {{ form.submit }}
-        </form> 
-    </div>
+      <div class="formwrapper">
+        <div class="form-field">
+          {{ form.comment(class_="textPlace") }}
+        </div>
+        {{ form.submit }}
+    </form>
+  </div>
 
-    
 
- </body>
+
+</body>
+
 </html>

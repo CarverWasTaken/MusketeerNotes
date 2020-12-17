@@ -11,7 +11,6 @@ from forms import RegisterForm, LoginForm, CommentForm
 import bcrypt
 from flask import session
 from sqlalchemy import and_, or_, not_
-
 from models import Comment as Comments
 
 
@@ -33,6 +32,73 @@ with app.app_context():
 def index():
     return redirect('/login')
 
+# Access to list of notes
+@app.route("/notes", methods=['POST', 'GET'])
+def notes():
+    if session.get('user'):
+        if request.method == 'POST':
+            # If you are posting to this URL it filters the notes that you are searching by
+            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
+            searchFor = request.form['search']
+            search = db.session.query(Note).filter((or_(Note.title.contains(searchFor), Note.text.contains(searchFor)))).filter_by(user_id=session['user_id'], pinned = False)                                
+            return render_template('MainPage.html', notes=search, user=session['user'], pinned = pinned)
+        else:
+            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
+            my_note = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = False).all()                        
+            return render_template('MainPage.html', notes=my_note,user=session['user'], pinned = pinned)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/note/<note_id>')
+def viewNote(note_id):
+    if session.get('user'):
+        my_note = db.session.query(Note).filter_by(id=note_id, user_id=session['user_id']).one()
+        
+        form = CommentForm()
+        return render_template("viewNote.html", note = my_note, user = session['user'], form = form)
+    else:
+        return redirect(url_for('login'))
+
+# User capibility to add notes -- saves notes to database "db"
+@app.route('/addNote', methods=['GET', 'POST'])
+def addNote():
+
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+        from datetime import date
+        today = date.today()
+        today = today.strftime('%m-%d-%Y')
+        new_record = Note(title, text, today, False, session['user_id'])
+        db.session.add(new_record)
+        db.session.commit()
+        return redirect(url_for('notes'))
+    else:
+        a_user = db.session.query(User).filter_by(name=User.name)
+        return render_template('mainPage.html', user=a_user)
+
+# Edit note and updating notes -- saving it to database "db"
+@app.route('/note/edit/<note_id>', methods=['POST'])
+def update_note(note_id):
+    if request.method == 'POST':
+        text = request.form['text']
+        note = db.session.query(Note).filter_by(id=note_id).one()
+
+        note.text = text
+
+        db.session.add(note)
+        db.session.commit()
+    return redirect('/note/' + str(note.id))
+
+
+# Delete Note -- updateing databse to reflect deletion
+@app.route('/note/delete/<note_id>', methods=['POST'])
+def delete_note(note_id):
+    my_note = db.session.query(Note).filter_by(id=note_id).one()
+    db.session.delete(my_note)
+    db.session.commit()
+
+    return redirect('/notes')
 
 # Login page route
 @app.route('/register', methods=['POST', 'GET'])
@@ -81,6 +147,7 @@ def login():
     else:
         # form did not validate or GET request
         return render_template("login.html", form=login_form)
+
 @app.route('/logout')
 def logout():
     # check if a user is saved in session
@@ -88,79 +155,6 @@ def logout():
         session.clear()
 
     return redirect(url_for('login'))
-
-
-# Access to list of notes
-@app.route("/notes", methods=['POST', 'GET'])
-def notes():
-    if session.get('user'):
-        if request.method == 'POST':
-            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
-            searchFor = request.form['search']
-            search = db.session.query(Note).filter((or_(Note.title.contains(searchFor), Note.text.contains(searchFor)))).filter_by(user_id=session['user_id'], pinned = False)                                
-            return render_template('MainPage.html', notes=search, user=session['user'], pinned = pinned)
-        else:
-            pinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
-            my_note = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = False).all()                        
-            return render_template('MainPage.html', notes=my_note,user=session['user'], pinned = pinned)
-    return redirect(url_for('login'))
-
-
-
-
-@app.route('/note/<note_id>')
-def viewNote(note_id):
-    if session.get('user'):
-        my_note = db.session.query(Note).filter_by(id=note_id, user_id=session['user_id']).one()
-        
-        form = CommentForm()
-        return render_template("viewNote.html", note = my_note, user = session['user'], form = form)
-    else:
-        return redirect(url_for('login'))
-
-
-# User capibility to add notes -- saves notes to database "db"
-@app.route('/addNote', methods=['GET', 'POST'])
-def addNote():
-
-    if request.method == 'POST':
-        title = request.form['title']
-        text = request.form['text']
-        from datetime import date
-        today = date.today()
-        today = today.strftime('%m-%d-%Y')
-        new_record = Note(title, text, today, False, session['user_id'])
-        db.session.add(new_record)
-        db.session.commit()
-        return redirect(url_for('notes'))
-    else:
-        a_user = db.session.query(User).filter_by(name=User.name)
-        return render_template('mainPage.html', user=a_user)
-
-
-# Edit note and updating notes -- saving it to database "db"
-@app.route('/note/edit/<note_id>', methods=['POST'])
-def update_note(note_id):
-    if request.method == 'POST':
-        text = request.form['text']
-        note = db.session.query(Note).filter_by(id=note_id).one()
-
-        note.text = text
-
-        db.session.add(note)
-        db.session.commit()
-    return redirect('/note/' + str(note.id))
-
-
-# Delete Note -- updateing databse to reflect deletion
-@app.route('/note/delete/<note_id>', methods=['POST'])
-def delete_note(note_id):
-    my_note = db.session.query(Note).filter_by(id=note_id).one()
-    db.session.delete(my_note)
-    db.session.commit()
-
-    return redirect('/notes')
-
 
 
 @app.route('/notes/<note_id>/comment', methods=['POST'])
@@ -207,13 +201,15 @@ def update_comment(comment_id, note_id):
 @app.route('/note/pin/<note_id>', methods=['POST'])
 def pin(note_id):
     if session.get('user'):
-        # checking to see if there is a note pinned
+        # checking to see if there is a note pinned for a user
         previousPinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
         if previousPinned:
+            # If there was a note pinned it removes that status from the note
             previousPinned.pinned = False
             db.session.add(previousPinned)
             db.session.commit()
         
+        # Changing the status of the note to pinned so that it will appear pinned in the front end
         my_note = db.session.query(Note).filter_by(id=note_id).one()
         my_note.pinned = True
         db.session.add(my_note)
@@ -226,9 +222,10 @@ def pin(note_id):
 @app.route('/note/unpin', methods=['POST'])
 def unpin():
     if session.get('user'):
-        # checking to see if there is a note pinned
+        # checking to see if there is a note pinned for a user
         previousPinned = db.session.query(Note).filter_by(user_id=session['user_id'], pinned = True).first()
         if previousPinned:
+            # If there was a note pinned it removes that status from the note
             previousPinned.pinned = False
             db.session.add(previousPinned)
             db.session.commit()
